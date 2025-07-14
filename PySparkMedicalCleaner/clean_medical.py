@@ -1,3 +1,6 @@
+'''This script transforms a medical insurance dataset using PySpark.
+It standardizes categorical values, creates new features based on BMI and age,'''
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, trim, lower, when
 
@@ -34,6 +37,7 @@ df = df.withColumn("expense_to_premium_ratio",
 # Step 4: Save transformed data to CSV
 df.coalesce(1).write.csv("cleaned_medical_insurance",
                          header=True, mode="overwrite")
+
 
 # Step 5: Load and show cleaned data
 dt = spark.read.csv("cleaned_medical_insurance",
